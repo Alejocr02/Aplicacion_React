@@ -1,4 +1,4 @@
-import { products } from '../data/products';
+import { products } from '../data/Product';
 import ProductCard from '../components/ProductCard';
 import styles from './ProductList.module.css';
 
