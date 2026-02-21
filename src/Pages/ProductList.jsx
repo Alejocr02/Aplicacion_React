@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { products } from "../data/products";
 import { products } from '../data/Product';
 import ProductCard from '../components/ProductCard';
 import styles from './ProductList.module.css';
@@ -16,7 +15,7 @@ function ProductList() {
                 </p>
             </header>
 
-            <div className={styles.grid}>   
+            <div className={styles.grid}>
                 {productsState.map((product) => (
                     <ProductCard
                         key={product.id}
