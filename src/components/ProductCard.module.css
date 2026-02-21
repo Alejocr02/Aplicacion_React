@@ -30,6 +30,12 @@
   flex: 1;
 }
 
+.productStock {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #374151;
+}
+
 .productCategory {
   font-size: 0.75rem;
   font-weight: 600;
