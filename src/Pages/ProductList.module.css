@@ -53,11 +53,18 @@
 }
 
 .btnAdd {
-  background: var(--primary);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
   border-radius: 0.75rem;
   padding: 0.85rem 1.25rem;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btnAdd:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }

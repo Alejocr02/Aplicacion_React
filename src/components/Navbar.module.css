@@ -64,16 +64,20 @@
 
 .authBtn {
   border: none;
-  background: var(--primary);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   color: white;
   cursor: pointer;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
   font-weight: 800;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(79, 172, 254, 0.3);
 }
 
 .authBtn:hover {
-  background: var(--primary-dark);
+  background: linear-gradient(135deg, #43a6fc 0%, #00e8f8 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
 @media (max-width: 768px) {
