@@ -19,6 +19,9 @@ function ProductList() {
         });
     };
 
+    const handleDeleteProduct = (id) => {
+  setProductsState((prev) => prev.filter((product) => product.id !== id));
+};
 
 
     return (
@@ -40,6 +43,7 @@ function ProductList() {
                         stock={product.stock}
                         image={product.image}
                         description={product.description}
+                        onDelete={() => handleDeleteProduct(product.id)}
                     />
                 ))}
             </div>
