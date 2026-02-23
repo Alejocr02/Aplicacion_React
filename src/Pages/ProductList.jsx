@@ -14,7 +14,7 @@ function ProductList() {
         setProductsState((prev) => {
             const maxId = prev.reduce((acc, item) => Math.max(acc, item.id), 0);
             const nextId = maxId + 1;
-
+            handleCloseForm();
             return [...prev, { ...product, id: nextId }];
         });
     };
@@ -27,6 +27,7 @@ const [editingProduct, setEditingProduct] = useState(null);
 
 const handleEditStart = (product) => {
   setEditingProduct(product);
+  setIsFormOpen(true);
 };
 
 const handleEditCancel = () => {
@@ -39,9 +40,22 @@ const handleEditSubmit = (updatedProduct) => {
       product.id === updatedProduct.id ? updatedProduct : product,
     ),
   );
-
+  handleCloseForm();
   setEditingProduct(null);
 };
+
+const handleOpenCreate = () => {
+  setEditingProduct(null);
+  setIsFormOpen(true);
+};
+
+const handleCloseForm = () => {
+  setEditingProduct(null);
+  setIsFormOpen(false);
+};
+
+
+const [isFormOpen, setIsFormOpen] = useState(false);
 
     return (
         <div className={styles.container}>
@@ -51,25 +65,42 @@ const handleEditSubmit = (updatedProduct) => {
                     Encuentra los mejores productos de tecnologia pra tu setup
                 </p>
             </header>
-            <ProductForm initialValues={editingProduct}
-                     isEditing={Boolean(editingProduct)}
-                     onCancel={handleEditCancel}
-                     onSubmit={editingProduct ? handleEditSubmit : handleAddProduct} />
-            <div className={styles.grid}>
-                {productsState.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        name={product.name}
-                        category={product.category}
-                        price={product.price}
-                        stock={product.stock}
-                        image={product.image}
-                        description={product.description}
-                        onDelete={() => handleDeleteProduct(product.id)}
-                        onEdit={() => handleEditStart(product)}
-                    />
-                ))}
-            </div>
+            {isFormOpen ? (
+                <ProductForm
+                    initialValues={editingProduct}
+                    isEditing={Boolean(editingProduct)}
+                    onCancel={handleCloseForm}
+                    onSubmit={editingProduct ? handleEditSubmit : handleAddProduct}
+                />
+            ) : (
+                <>
+                    <div className={styles.toolbar}>
+                        <button
+                            className={styles.btnAdd}
+                            type="button"
+                            onClick={handleOpenCreate}
+                        >
+                            Agregar producto
+                        </button>
+                    </div>
+
+                    <div className={styles.grid}>
+                        {productsState.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                name={product.name}
+                                category={product.category}
+                                price={product.price}
+                                stock={product.stock}
+                                image={product.image}
+                                description={product.description}
+                                onDelete={() => handleDeleteProduct(product.id)}
+                                onEdit={() => handleEditStart(product)}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     );
 }
