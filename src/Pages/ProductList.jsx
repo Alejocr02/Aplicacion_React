@@ -1,13 +1,36 @@
 
 import ProductForm from "../components/ProductForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { products } from '../data/Product';
 import ProductCard from '../components/ProductCard';
 import styles from './ProductList.module.css';
 
+const STORAGE_KEY = "products";
 
 function ProductList() {
-    const [productsState, setProductsState] = useState(products);
+    const [productsState, setProductsState] = useState(() => {
+      if (typeof window === "undefined") {
+        return products;
+      }
+    
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      if (!stored) {
+        return products;
+      }
+    
+      try {
+        const parsed = JSON.parse(stored);
+        return Array.isArray(parsed) ? parsed : products;
+      } catch {
+        return products;
+      }
+    });
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(productsState));
+        }
+    }, [productsState]);
 
 
     const handleAddProduct = (product) => {
@@ -53,7 +76,6 @@ const handleCloseForm = () => {
   setEditingProduct(null);
   setIsFormOpen(false);
 };
-
 
 const [isFormOpen, setIsFormOpen] = useState(false);
 
