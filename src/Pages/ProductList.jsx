@@ -1,4 +1,4 @@
-
+import { useEffect, useState } from "react";
 import ProductForm from "../components/ProductForm";
 import { useState, useEffect } from "react";
 import { products } from '../data/Product';
@@ -27,9 +27,15 @@ function ProductList() {
     });
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(productsState));
-        }
+      if (typeof window === "undefined") {
+        return;
+      }
+    
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(productsState));
+      } catch (error) {
+        void error;
+      }
     }, [productsState]);
 
 
