@@ -23,7 +23,7 @@ export const products = [
     category: 'Audio',
     price: 1200000,
     stock: 20,
-    image: '',
+    image: 'src/assets/auris.jpg',
     description: 'Audifonos Sony WH-1000XM4 con cancelación de ruido, sonido de alta calidad y batería de larga duración. Perfectos para música y llamadas.'
  },
  {
@@ -32,7 +32,7 @@ export const products = [
     category: 'Wearables',
     price: 2500000,
    stock: 5,
-    image: '',
+    image: 'src/assets/reloj.jpg',
     description: 'Smartwatch Apple Watch Series 6 con monitoreo de salud, GPS integrado y resistencia al agua. Ideal para mantenerse conectado y activo durante todo el día.'
  }
 ]
