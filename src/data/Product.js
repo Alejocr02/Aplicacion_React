@@ -1,38 +1,64 @@
+
 export const products = [
- {
+  {
     id: 1,
     name: 'Laptop HP Pavilion',
     category: 'Laptops',
-    price: 2499.99,
-    stock: 10,
-    image: 'src/assets/compu.jpg',
-    description: 'Laptop potente con procesador Intel Core i5, 16GB de RAM y almacenamiento SSD de 512GB. Ideal para tareas exigentes y juegos.'
+    rating: 4.6,
+    price: 2499900,
+    stock: 5,
+    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400',
+    description: 'Laptop potente con procesador Intel Core i7, 16GB RAM y 512GB SSD',
   },
- {
+  {
     id: 2,
-    name: 'Smartphone Samsung Galaxy S21',
-    category: 'Smartphones',
-    price: 3500000,
-    stock: 15,
-    image: 'src/assets/celuco.webp',
-    description: 'Smartphone Samsung Galaxy S21 con pantalla AMOLED de 6.2 pulgadas, cámara de alta resolución y batería de larga duración. Perfecto para capturar momentos y disfrutar de contenido multimedia.'  
- },
- {
+    name: 'Mouse Logitech MX Master 3',
+    category: 'Accesorios',
+    rating: 4.8,
+    price: 119990,
+    stock: 18,
+    image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400',
+    description: 'Mouse ergonómico inalámbrico con alta precisión y batería de larga duración',
+  },
+  {
     id: 3,
-    name: 'Auriculares Sony WH-1000XM4',
-    category: 'Audio',
-    price: 1200000,
-    stock: 20,
-    image: 'src/assets/auris.jpg',
-    description: 'Audifonos Sony WH-1000XM4 con cancelación de ruido, sonido de alta calidad y batería de larga duración. Perfectos para música y llamadas.'
- },
- {
+    name: 'Teclado Mecánico Keychron K2',
+    category: 'Accesorios',
+    rating: 4.4,
+    price: 149990,
+    stock: 12,
+    image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=400',
+    description: 'Teclado mecánico compacto con switches Blue y retroiluminación RGB',
+  },
+  {
     id: 4,
-    name: 'Smartwatch Apple Watch Series 6',
-    category: 'Wearables',
-    price: 2500000,
-   stock: 5,
-    image: 'src/assets/reloj.jpg',
-    description: 'Smartwatch Apple Watch Series 6 con monitoreo de salud, GPS integrado y resistencia al agua. Ideal para mantenerse conectado y activo durante todo el día.'
- }
-]
+    name: 'Monitor LG UltraWide 34"',
+    category: 'Monitores',
+    rating: 4.7,
+    price: 899990,
+    stock: 6,
+    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400',
+    description:
+      'Monitor curvo ultra ancho de 34 pulgadas, resolución 3440x1440, ideal para productividad',
+  },
+  {
+    id: 5,
+    name: 'Audífonos Sony WH-1000XM5',
+    category: 'Audio',
+    rating: 4.9,
+    price: 399990,
+    stock: 9,
+    image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400',
+    description: 'Audífonos premium con cancelación de ruido activa y sonido Hi-Res',
+  },
+  {
+    id: 6,
+    name: 'Webcam Logitech C920',
+    category: 'Accesorios',
+    rating: 4.2,
+    price: 79990,
+    stock: 14,
+    image: 'https://www.google.com/aclk?sa=L&ai=DChsSEwiFj5PchvuSAxVSrFoFHYi_CpkYACICCAEQARoCdnU&co=1&ase=2&gclid=EAIaIQobChMIhY-T3Ib7kgMVUqxaBR2IvwqZEAQYASABEgKL-fD_BwE&cid=CAASugHkaEIhoPUkeFjlPJeP8dNmtQbOfb8Q1B1steltVkZ6jmWzTb5_thcLSh27PmfLaKxBbCItHV5PA2VK91_QiBj_gCFpxGZu5feSlPYZGxw3EkbB_oOz-6xTb_gYk08-2aIguPO6S6388Mx4FXheAq56hYZyKUTKBUhZuc-o7Vf4-EpYx_ADvFJ7ht2J6nS03UQe9tDuosGFlwrGq7tXFTV0FMW5aUbQdlcga2mAh4wlNcsEj8P6LrAKQFQ&cce=2&category=acrcp_v1_32&sig=AOD64_1rOkR_kuVxc8R2XLyZ2XNO2Cw1Ew&ctype=5&q=&nis=4&ved=2ahUKEwj8lI_chvuSAxXCTTABHXftAe0Qwg8oAXoECAgQDA&adurl=',
+    description: 'Webcam Full HD 1080p ideal para videollamadas y streaming',
+  },
+];
