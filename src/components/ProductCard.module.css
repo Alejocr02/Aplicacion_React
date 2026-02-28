@@ -11,43 +11,6 @@
   flex-direction: column;
 }
 
-.cardActions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.btnDelete {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btnDelete:hover {
-  background: #c82333;
-}
-
-.btnEdit {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.btnEdit:hover {
-  background: #0069d9;
-}
-
 .productCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
@@ -65,12 +28,6 @@
   flex-direction: column;
   gap: 0.5rem;
   flex: 1;
-}
-
-.productStock {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #374151;
 }
 
 .productCategory {
@@ -93,6 +50,18 @@
   color: #6b7280;
   line-height: 1.5;
   flex: 1;
+}
+
+.productRating {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #374151;
+}
+
+.productStock {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #374151;
 }
 
 .productFooter {
@@ -118,7 +87,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .btnLike:hover {
@@ -136,4 +105,48 @@
 
 .btnLike.liked:hover {
   background: #fecaca;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.btnEdit,
+.btnDetails,
+.btnDelete {
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btnDetails {
+  background: var(--gray-100);
+  color: var(--gray-900);
+}
+
+.btnDetails:hover {
+  background: var(--gray-200);
+}
+
+.btnEdit {
+  background: var(--primary);
+  color: white;
+}
+
+.btnEdit:hover {
+  background: var(--primary-dark);
+}
+
+.btnDelete {
+  background: var(--danger);
+  color: white;
+}
+
+.btnDelete:hover {
+  filter: brightness(0.95);
 }
