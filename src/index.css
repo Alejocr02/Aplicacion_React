@@ -1,4 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Asegura que el padding no añada ancho */
+}
+
 :root {
+ 
   --primary: #6366f1;
   --primary-dark: #4f46e5;
   --danger: #ef4444;
