@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import ProductCard from '../components/ProductCard';
+import { addToCart } from '../utils/cartStorage';
 import ProductDetailsModal from '../components/ProductDetailsModal';
 import styles from './CategoryProducts.module.css';
 import productListStyles from './ProductList.module.css';
@@ -66,7 +67,7 @@ function CategoryProducts({ category, onBack }) {
       ) : (
         <div className={productListStyles.grid}>
           {filteredProducts.map((product) => (
-            <ProductCard
+              <ProductCard
               key={product.id}
               name={product.name}
               category={product.category}
@@ -76,6 +77,10 @@ function CategoryProducts({ category, onBack }) {
               image={product.image}
               description={product.description}
               onDetails={() => handleOpenDetails(product)}
+              onAddToCart={() => {
+                addToCart(product.id, 1);
+                alert(`${product.name} agregado al carrito`);
+              }}
             />
           ))}
         </div>

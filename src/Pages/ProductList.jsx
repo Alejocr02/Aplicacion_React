@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import ProductCard from '../components/ProductCard';
+import { addToCart } from '../utils/cartStorage';
 import ProductForm from '../components/ProductForm';
 import styles from './ProductList.module.css';
 import { loadProducts, PRODUCTS_STORAGE_KEY } from '../utils/productsStorage';
@@ -102,6 +103,10 @@ function ProductList() {
                 description={product.description}
                 onDelete={() => handleDeleteProduct(product.id)}
                 onEdit={() => handleEditStart(product)}
+                onAddToCart={() => {
+                  addToCart(product.id, 1);
+                  alert(`${product.name} agregado al carrito`);
+                }}
               />
             ))}
           </div>

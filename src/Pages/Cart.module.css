@@ -1,0 +1,123 @@
+.cart {
+  padding: 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: #444;
+  background: #f8f8f8;
+  border-radius: 8px;
+}
+
+.items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  align-items: center;
+  background: white;
+}
+
+.image {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  margin: 0 0 0.25rem 0;
+}
+
+.price {
+  margin: 0 0 0.5rem 0;
+  color: #222;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btnRemove {
+  margin-left: 1rem;
+  padding: 0.25rem 0.5rem;
+  border: 0;
+  background: #ff6b6b;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qty {
+  min-width: 24px;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summary {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.total {
+  font-size: 1.2rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btnPrimary {
+  background: #2563eb;
+  color: white;
+  border: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  background: #e5e7eb;
+  border: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+}

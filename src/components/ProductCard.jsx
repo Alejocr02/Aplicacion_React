@@ -14,6 +14,7 @@ function ProductCard({
   onDetails,
   onEdit,
   onDelete,
+  onAddToCart,
 }) {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -49,7 +50,7 @@ function ProductCard({
           </button>
         </div>
 
-        {onDetails || onEdit || onDelete ? (
+        {onDetails || onEdit || onDelete || onAddToCart ? (
           <div className={styles.cardActions}>
             {onDetails ? (
               <button type="button" className={styles.btnDetails} onClick={onDetails}>
@@ -66,6 +67,12 @@ function ProductCard({
             {onDelete ? (
               <button type="button" className={styles.btnDelete} onClick={onDelete}>
                 Eliminar
+              </button>
+            ) : null}
+
+            {onAddToCart ? (
+              <button type="button" className={styles.btnAdd} onClick={onAddToCart}>
+                Agregar al carrito
               </button>
             ) : null}
           </div>
