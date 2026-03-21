@@ -1,53 +1,62 @@
-const CART_KEY = 'cart_items';
+const STORAGE_KEY = 'cartItems';
 
-function readCart() {
+const clampQuantity = (value, maxStock) => {
+  const parsed = Number(value);
+  const normalizedMaxStock =
+    Number.isFinite(Number(maxStock)) && Number(maxStock) > 0 ? Number(maxStock) : 1;
+
+  if (!Number.isFinite(parsed)) {
+    return 1;
+  }
+
+  return Math.min(normalizedMaxStock, Math.max(1, Math.floor(parsed)));
+};
+
+const normalizeCartItem = (item) => {
+  const stock =
+    Number.isFinite(Number(item?.stock)) && Number(item.stock) > 0 ? Number(item.stock) : 1;
+
+  return {
+    id: Number(item?.id),
+    name: String(item?.name ?? 'Producto'),
+    category: String(item?.category ?? 'Sin categoría'),
+    price: Number(item?.price) || 0,
+    stock,
+    image: String(item?.image ?? ''),
+    quantity: clampQuantity(item?.quantity, stock),
+  };
+};
+
+export function loadCartItems() {
+  if (typeof window === 'undefined') {
+    return [];
+  }
+
+  const stored = window.localStorage.getItem(STORAGE_KEY);
+
+  if (!stored) {
+    return [];
+  }
+
   try {
-    const raw = window.localStorage.getItem(CART_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    const parsed = JSON.parse(stored);
+
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed
+      .map(normalizeCartItem)
+      .filter((item) => Number.isFinite(item.id) && item.quantity > 0);
   } catch {
     return [];
   }
 }
 
-function writeCart(items) {
-  try {
-    window.localStorage.setItem(CART_KEY, JSON.stringify(items));
-  } catch {
-    // ignore
+export function addToCart(productId, quantity) {
+  if (typeof window === 'undefined') {
+    return;
   }
 }
 
-export function addToCart(id, quantity = 1) {
-  const cur = readCart();
-  const idx = cur.findIndex((it) => it.id === id);
-  if (idx === -1) {
-    cur.push({ id, quantity });
-  } else {
-    cur[idx].quantity = Math.max(1, Number(cur[idx].quantity || 0) + Number(quantity || 0));
-  }
-  writeCart(cur);
-  return cur;
-}
-
-export function removeFromCart(id) {
-  const cur = readCart().filter((it) => it.id !== id);
-  writeCart(cur);
-  return cur;
-}
-
-export function clearCart() {
-  writeCart([]);
-}
-
-export function getCart() {
-  return readCart();
-}
-
-export default {
-  addToCart,
-  removeFromCart,
-  clearCart,
-  getCart,
-};
+export const CART_STORAGE_KEY = STORAGE_KEY;
