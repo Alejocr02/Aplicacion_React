@@ -114,6 +114,7 @@
 }
 
 .btnEdit,
+.btnAddToCart,
 .btnDetails,
 .btnDelete {
   border: none;
@@ -151,17 +152,16 @@
   filter: brightness(0.95);
 }
 
-.btnAdd {
-  background: #10b981;
-  color: white;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  font-weight: 800;
-  cursor: pointer;
+.btnAddToCart {
+  background: #d1fae5;
+  color: #065f46;
 }
 
-.btnAdd:hover {
-  filter: brightness(0.95);
+.btnAddToCart:hover:not(:disabled) {
+  background: #a7f3d0;
+}
+
+.btnAddToCart:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
