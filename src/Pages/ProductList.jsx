@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import ProductCard from '../components/ProductCard';
-import { addToCart } from '../utils/cartStorage';
 import ProductForm from '../components/ProductForm';
 import styles from './ProductList.module.css';
 import { loadProducts, PRODUCTS_STORAGE_KEY } from '../utils/productsStorage';
 
 const STORAGE_KEY = PRODUCTS_STORAGE_KEY;
 
-function ProductList() {
+function ProductList({ onAddToCart }) {
   const [productsState, setProductsState] = useState(loadProducts);
   const [editingProduct, setEditingProduct] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -94,6 +93,7 @@ function ProductList() {
             {productsState.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 category={product.category}
                 price={product.price}
@@ -103,10 +103,7 @@ function ProductList() {
                 description={product.description}
                 onDelete={() => handleDeleteProduct(product.id)}
                 onEdit={() => handleEditStart(product)}
-                onAddToCart={() => {
-                  addToCart(product.id, 1);
-                  alert(`${product.name} agregado al carrito`);
-                }}
+                onAddToCart={onAddToCart}
               />
             ))}
           </div>
