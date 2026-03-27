@@ -1,5 +1,5 @@
-import { useEffect,useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -13,10 +13,10 @@ import { CART_STORAGE_KEY, loadCartItems } from './utils/cartStorage';
 import './App.css';
 
 function App() {
-  
+  const navigate = useNavigate();
+
   const [user, setUser] = useState(null);
-  const [cartItems, setCartItem] = useState(loadCartItems);
-  const [latestOrder, setLatestOrder] = useState(null);
+  const [cartItems, setCartItems] = useState(loadCartItems);
 
   useEffect(() => {
     window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
@@ -89,21 +89,57 @@ function App() {
   const handleClearCart = () => {
     setCartItems([]);
   };
+
+  const handleSignIn = () => {
+    setUser({ name: 'Usuario' });
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+  };
+
+  const cartItemCount = useMemo(
+    () => cartItems.reduce((total, item) => total + item.quantity, 0),
+    [cartItems]
+  );
+
   return (
     <div className="app">
       <Header
         user={user}
         onSignIn={handleSignIn}
         onSignOut={handleSignOut}
-
+        cartItemCount={cartItemCount}
       />
 
       <main className="main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:categoryName"
-                 element={<CategoryProducts cartItems={cartItems} onAddToCart={handleAddToCart} />} />
-          <Route path="/products" element={<ProductList />} />
+                 element={
+                   <CategoryProducts
+                     cartItems={cartItems}
+                     onAddToCart={handleAddToCart}
+                     onBack={() => navigate('/')}
+                   />
+                 }
+          />
+          <Route
+            path="/products"
+            element={<ProductList onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cartItems={cartItems}
+                onUpdateQuantity={handleUpdateCartItemQuantity}
+                onRemoveItem={handleRemoveCartItem}
+                onClearCart={handleClearCart}
+                onContinueShopping={() => navigate('/')}
+              />
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
