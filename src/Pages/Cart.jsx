@@ -1,105 +1,131 @@
-
-import { useEffect, useMemo, useState } from 'react';
 import styles from './Cart.module.css';
-import { loadProducts } from '../utils/productsStorage';
+import { formatCOP } from '../utils/formatCOP';
 
-const CART_KEY = 'cart_items';
+function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart, onContinueShopping }) {
+    const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
-function readCart() {
-    try {
-        const raw = window.localStorage.getItem(CART_KEY);
-        if (!raw) return [];
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : [];
-    } catch {
-        return [];
+    if (cartItems.length === 0) {
+        return (
+            <section className={styles.container}>
+                <div className={styles.header}>
+                    <div>
+                        <h1 className={styles.title}>Carrito</h1>
+                        <p className={styles.subtitle}>Todavia no tienes productos agregados.</p>
+                    </div>
+
+                    <button type="button" className={styles.btnContinue} onClick={onContinueShopping}>
+                        Seguir comprando
+                    </button>
+                </div>
+
+                <div className={styles.empty}>
+                    <h2 className={styles.emptyTitle}>Tu carrito esta vacio</h2>
+                    <p className={styles.emptyText}>
+                        Vuelve al catalogo, entra a una categoria y agrega productos para continuar.
+                    </p>
+                    <button type="button" className={styles.btnContinue} onClick={onContinueShopping}>
+                        Ir al inicio
+                    </button>
+                </div>
+            </section>
+        );
     }
-}
-
-function writeCart(items) {
-    try {
-        window.localStorage.setItem(CART_KEY, JSON.stringify(items));
-    } catch {
-        // ignore
-    }
-}
-
-function formatCurrency(value) {
-    try {
-        return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(value);
-    } catch {
-        return String(value);
-    }
-}
-
-function Cart() {
-    const [cart, setCart] = useState(() => {
-        if (typeof window === 'undefined') return [];
-        return readCart();
-    });
-
-    const products = useMemo(() => loadProducts(), []);
-
-    useEffect(() => {
-        writeCart(cart);
-    }, [cart]);
-
-    const items = cart
-        .map((entry) => ({ ...entry, product: products.find((p) => p.id === entry.id) }))
-        .filter((it) => it.product);
-
-    const total = items.reduce((s, it) => s + (Number(it.product.price) || 0) * (Number(it.quantity) || 0), 0);
-
-    const updateQuantity = (id, next) => {
-        setCart((cur) => cur.map((e) => (e.id === id ? { ...e, quantity: Math.max(1, next) } : e)));
-    };
-
-    const removeItem = (id) => {
-        setCart((cur) => cur.filter((e) => e.id !== id));
-    };
-
-    const clearCart = () => setCart([]);
 
     return (
-        <section className={styles.cart}>
-            <h1 className={styles.title}>Carrito de Compras</h1>
-
-            {items.length === 0 ? (
-                <div className={styles.empty}>
-                    <p>No tienes productos en el carrito.</p>
+        <section className={styles.container}>
+            <div className={styles.header}>
+                <div>
+                    <h1 className={styles.title}>Carrito</h1>
+                    <p className={styles.subtitle}>Gestiona cantidades, revisa subtotales y prepara el checkout.</p>
                 </div>
-            ) : (
-                <>
-                    <ul className={styles.items}>
-                        {items.map(({ id, quantity, product }) => (
-                            <li key={id} className={styles.item}>
-                                <img src={product.image} alt={product.name} className={styles.image} />
-                                <div className={styles.info}>
-                                    <h3 className={styles.name}>{product.name}</h3>
-                                    <p className={styles.price}>{formatCurrency(product.price)}</p>
-                                    <div className={styles.controls}>
-                                        <button className={styles.btn} onClick={() => updateQuantity(id, Number(quantity) - 1)}>-</button>
-                                        <span className={styles.qty}>{quantity}</span>
-                                        <button className={styles.btn} onClick={() => updateQuantity(id, Number(quantity) + 1)}>+</button>
-                                        <button className={styles.btnRemove} onClick={() => removeItem(id)}>Eliminar</button>
-                                    </div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
 
-                    <footer className={styles.footer}>
-                        <div className={styles.summary}>
-                            <span>Total:</span>
-                            <strong className={styles.total}>{formatCurrency(total)}</strong>
+                <button type="button" className={styles.btnContinue} onClick={onContinueShopping}>
+                    Seguir comprando
+                </button>
+            </div>
+
+            <div className={styles.layout}>
+                <div className={styles.items}>
+                    <div className={styles.itemList}>
+                        {cartItems.map((item) => {
+                            const itemSubtotal = item.price * item.quantity;
+
+                            return (
+                                <article key={item.id} className={styles.item}>
+                                    <img className={styles.image} src={item.image} alt={item.name} />
+
+                                    <div className={styles.itemInfo}>
+                                        <span className={styles.category}>{item.category}</span>
+                                        <h2 className={styles.name}>{item.name}</h2>
+                                        <p className={styles.price}>Precio unitario: {formatCOP(item.price)}</p>
+                                        <p className={styles.stock}>Stock disponible: {item.stock}</p>
+                                        <p className={styles.subtotal}>
+                                            <span className={styles.subtotalLabel}>Subtotal:</span>{' '}
+                                            {formatCOP(itemSubtotal)}
+                                        </p>
+                                    </div>
+
+                                    <div className={styles.actions}>
+                                        <div className={styles.quantityBox}>
+                                            <button
+                                                type="button"
+                                                className={styles.btnQuantity}
+                                                onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                                                disabled={item.quantity <= 1}
+                                            >
+                                                -
+                                            </button>
+                                            <span className={styles.quantityValue}>{item.quantity}</span>
+                                            <button
+                                                type="button"
+                                                className={styles.btnQuantity}
+                                                onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                                                disabled={item.quantity >= item.stock}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+
+                                        <button
+                                            type="button"
+                                            className={styles.btnRemove}
+                                            onClick={() => onRemoveItem(item.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </article>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                <aside className={styles.summary}>
+                    <h2 className={styles.summaryTitle}>Resumen</h2>
+
+                    <div className={styles.summaryRows}>
+                        <div className={styles.summaryRow}>
+                            <span>Productos</span>
+                            <span className={styles.summaryValue}>{cartItems.length}</span>
                         </div>
-                        <div className={styles.actions}>
-                            <button className={styles.btnSecondary} onClick={clearCart}>Vaciar carrito</button>
-                            <button className={styles.btnPrimary} onClick={() => alert('Simulación de pago — implementar proceso de checkout')}>Pagar</button>
+
+                        <div className={styles.summaryRow}>
+                            <span>Unidades</span>
+                            <span className={styles.summaryValue}>{totalItems}</span>
                         </div>
-                    </footer>
-                </>
-            )}
+
+                        <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>
+                            <span>Total</span>
+                            <span className={styles.summaryValue}>{formatCOP(subtotal)}</span>
+                        </div>
+                    </div>
+
+                    <button type="button" className={styles.btnClear} onClick={onClearCart}>
+                        Vaciar carrito
+                    </button>
+                </aside>
+            </div>
         </section>
     );
 }
