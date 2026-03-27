@@ -53,10 +53,4 @@ export function loadCartItems() {
   }
 }
 
-export function addToCart(productId, quantity) {
-  if (typeof window === 'undefined') {
-    return;
-  }
-}
-
 export const CART_STORAGE_KEY = STORAGE_KEY;
