@@ -1,7 +1,7 @@
 import styles from './Cart.module.css';
 import { formatCOP } from '../utils/formatCOP';
 
-function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart, onContinueShopping }) {
+function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart, onContinueShopping, onProceedToCheckout }) {
     const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
     const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
@@ -121,9 +121,14 @@ function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart, onContin
                         </div>
                     </div>
 
-                    <button type="button" className={styles.btnClear} onClick={onClearCart}>
-                        Vaciar carrito
-                    </button>
+                    <div className={styles.actionsGroup}>
+                        <button type="button" className={styles.btnClear} onClick={onClearCart}>
+                            Vaciar carrito
+                        </button>
+                        <button type="button" className={styles.btnCheckout} onClick={onProceedToCheckout}>
+                            Proceder al checkout
+                        </button>
+                    </div>
                 </aside>
             </div>
         </section>
