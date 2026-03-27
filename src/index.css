@@ -26,3 +26,11 @@ body {
 #root {
   min-height: 100vh;
 }
+
+button {
+  transition: filter 0.15s ease, background-color 0.15s ease;
+}
+
+button:active:not(:disabled) {
+  filter: brightness(0.85);
+}
