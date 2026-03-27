@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 import styles from './ProductCard.module.css';
-//import { formatCOP } from '../utils/formatCOP';
+import { formatCOP } from '../utils/formatCOP';
 
 function ProductCard({
+  id,
   name,
   category,
   price,
@@ -15,6 +16,7 @@ function ProductCard({
   onEdit,
   onDelete,
   onAddToCart,
+  disableAddToCart = false,
 }) {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -41,7 +43,7 @@ function ProductCard({
         <p className={styles.productDescription}>{description}</p>
         <p className={styles.productStock}>Stock: {stock}</p>
         <div className={styles.productFooter}>
-          <span className={styles.productPrice}>{(price)}</span>
+          <span className={styles.productPrice}>{formatCOP(price)}</span>
           <button
             className={`${styles.btnLike} ${isLiked ? styles.liked : ''}`}
             onClick={handleLike}
@@ -50,8 +52,19 @@ function ProductCard({
           </button>
         </div>
 
-        {onDetails || onEdit || onDelete || onAddToCart ? (
+        {onAddToCart || onDetails || onEdit || onDelete ? (
           <div className={styles.cardActions}>
+            {onAddToCart ? (
+              <button
+                type="button"
+                className={styles.btnAddToCart}
+                onClick={() => onAddToCart({ id, name, category, price, stock, image })}
+                disabled={disableAddToCart}
+              >
+                {disableAddToCart ? 'Stock agotado en carrito' : 'Agregar al carrito'}
+              </button>
+            ) : null}
+
             {onDetails ? (
               <button type="button" className={styles.btnDetails} onClick={onDetails}>
                 Más información
@@ -70,11 +83,6 @@ function ProductCard({
               </button>
             ) : null}
 
-            {onAddToCart ? (
-              <button type="button" className={styles.btnAdd} onClick={onAddToCart}>
-                Agregar al carrito
-              </button>
-            ) : null}
           </div>
         ) : null}
       </div>
