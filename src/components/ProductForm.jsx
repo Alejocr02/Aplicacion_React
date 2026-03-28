@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import styles from "./ProductForm.module.css";
+import styles from "../styles/ProductForm.module.css";
 
 const emptyValues = {
   name: "",
