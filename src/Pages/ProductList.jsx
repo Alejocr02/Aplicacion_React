@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import ProductCard from '../components/ProductCard';
 import ProductForm from '../components/ProductForm';
-import styles from './ProductList.module.css';
+import styles from '../styles/ProductList.module.css';
 import { loadProducts, PRODUCTS_STORAGE_KEY } from '../utils/productsStorage';
 
 const STORAGE_KEY = PRODUCTS_STORAGE_KEY;
