@@ -1,5 +1,5 @@
 
-import styles from "./Footer.module.css";
+import styles from "../styles/Footer.module.css";
 
 function Footer() {
   const year = new Date().getFullYear();
