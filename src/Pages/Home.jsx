@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 
-import homeStyles from './Home.module.css';
+import homeStyles from '../styles/Home.module.css';
 import { loadProducts } from '../utils/productsStorage';
 
 function Home() {
@@ -52,7 +52,7 @@ function Home() {
             onClick={() => navigate(`/category/${encodeURIComponent(category)}`)}
             aria-label={`Ver productos de ${category}`}
           >
-            <img className={homeStyles.categoryImage} src={product.image} alt={product.name} />
+            <img className={homeStyles.categoryImage} src={product.image || null} alt={product.name} />
             <div className={homeStyles.categoryLabel}>
               <span className={homeStyles.categoryLabelText}>{category}</span>
             </div>
