@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import styles from './ProductDetailsModal.module.css';
+import styles from '../styles/ProductDetailsModal.module.css';
 //import { formatCOP } from '../utils/formatCOP';
 
 function ProductDetailsModal({ isOpen, product, onClose }) {
@@ -50,7 +50,7 @@ function ProductDetailsModal({ isOpen, product, onClose }) {
         </header>
 
         <div className={styles.content}>
-          <img className={styles.image} src={product.image} alt={product.name} />
+          <img className={styles.image} src={product.image || null} alt={product.name} />
 
           <div className={styles.details}>
             <p className={styles.description}>{product.description}</p>
