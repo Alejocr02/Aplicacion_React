@@ -1,4 +1,4 @@
-import styles from './OrderConfirmation.module.css';
+import styles from '../styles/OrderConfirmation.module.css';
 import { formatCOP } from '../utils/formatCOP';
 
 function OrderConfirmation({ order, onBackHome }) {
@@ -66,7 +66,7 @@ function OrderConfirmation({ order, onBackHome }) {
           <div className={styles.items}>
             {order.items.map((item) => (
               <article key={item.id} className={styles.item}>
-                <img src={item.image} alt={item.name} className={styles.image} />
+                  <img src={item.image || null} alt={item.name} className={styles.image} />
                 <div className={styles.itemInfo}>
                   <h3 className={styles.itemName}>{item.name}</h3>
                   <p>
