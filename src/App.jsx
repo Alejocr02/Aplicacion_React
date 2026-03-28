@@ -17,7 +17,7 @@ import {
 import { CART_STORAGE_KEY, loadCartItems } from './utils/cartStorage';
 import { loadOrders, saveOrder } from './utils/ordersStorage';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
   const navigate = useNavigate();
