@@ -1,3 +1,4 @@
+import ipadLocal from '../assets/ipadpro.jpg';
 
 export const products = [
   {
@@ -68,7 +69,7 @@ export const products = [
     rating: 4.8,
     price: 1299990,
     stock: 8,
-    image: 'https://images.unsplash.com/photo-1533541701686-a643b8315a3f?w=400',
+    image: ipadLocal,
     description: 'Tablet de 12.9 pulgadas con procesador M2, 256GB almacenamiento y pantalla Liquid Retina XDR',
   },
   {
