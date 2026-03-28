@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import ProductCard from '../components/ProductCard';
 import ProductDetailsModal from '../components/ProductDetailsModal';
-import styles from './CategoryProducts.module.css';
-import productListStyles from './ProductList.module.css';
+import styles from '../styles/CategoryProducts.module.css';
+import productListStyles from '../styles/ProductList.module.css';
 import { loadProducts } from '../utils/productsStorage';
 
 function CategoryProducts({ cartItems, onAddToCart, onBack }) {
