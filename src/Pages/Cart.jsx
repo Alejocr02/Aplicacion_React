@@ -1,4 +1,4 @@
-import styles from './Cart.module.css';
+import styles from '../styles/Cart.module.css';
 import { formatCOP } from '../utils/formatCOP';
 
 function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart, onContinueShopping, onProceedToCheckout }) {
@@ -53,7 +53,7 @@ function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart, onContin
 
                             return (
                                 <article key={item.id} className={styles.item}>
-                                    <img className={styles.image} src={item.image} alt={item.name} />
+                                    <img className={styles.image} src={item.image || null} alt={item.name} />
 
                                     <div className={styles.itemInfo}>
                                         <span className={styles.category}>{item.category}</span>
